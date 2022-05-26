@@ -5,10 +5,10 @@ using UnityEngine.TestTools;
 using UnityEngine.UI;
 namespace TestGame
 {
-    public class PlayModeTestGame
+    public class Tests
     {
-        bool clicked = false; 
-        
+        bool clicked = false;
+
         [SetUp]
         public void SetUp()
         {
