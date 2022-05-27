@@ -36,5 +36,6 @@ jobs:
             name: CISampleOSXBinary
             path: ./bin-osx
 
-        # Return License
+        # Return License       
+	  - name: return License
 	    run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -returnlicense -username ${{ secrets.UNITY_USERNAME }} -password ${{ secrets.UNITY_PASSWORD }}
