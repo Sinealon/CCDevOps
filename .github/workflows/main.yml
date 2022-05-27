@@ -17,8 +17,8 @@ jobs:
         - name: license
           run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -serial ${{ secrets.UNITY_LICENSE_KEY }} -username '${{ secrets.UNITY_USERNAME }}' -password '${{ secrets.UNITY_PASSWORD }}'
         
-        # Build Windows and OSX
-        - name: Build Windows Player
+        # Build Android
+        - name: Create Android Build
           run: /opt/unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -projectPath . -buildTarget Android
 
         # Return License       
