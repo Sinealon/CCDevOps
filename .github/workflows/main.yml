@@ -15,7 +15,7 @@ jobs:
         - name: Activate Unity
           run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_c2020.c.ulf || exit 0
         - name: license
-	    run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -serial ${{ secrets.UNITY_LICENSE_KEY }} -username '${{ secrets.UNITY_USERNAME }}' -password '${{ secrets.UNITY_PASSWORD }}'
+	  run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -serial ${{ secrets.UNITY_LICENSE_KEY }} -username '${{ secrets.UNITY_USERNAME }}' -password '${{ secrets.UNITY_PASSWORD }}'
         
         # Build Windows and OSX
         - name: Build Windows Player
@@ -28,5 +28,5 @@ jobs:
             path: ./bin-win64
 
         # Return License       
-	  - name: return License
-	    run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -returnlicense -username ${{ secrets.UNITY_USERNAME }} -password ${{ secrets.UNITY_PASSWORD }}
+         - name: return License
+           run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -returnlicense -username ${{ secrets.UNITY_USERNAME }} -password ${{ secrets.UNITY_PASSWORD }}
