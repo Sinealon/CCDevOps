@@ -21,8 +21,8 @@ jobs:
         - name: Build OSX Player
           run: /opt/unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -projectPath . -buildOSXUniversalPlayer ./bin-osx/CISample.app      
         
-        - name: license
-           run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -serial ${{ secrets.UNITY_LICENSE_KEY }} -username '${{ secrets.UNITY_USERNAME }}' -password '${{ secrets.UNITY_PASSWORD }}'
+        - name: license 
+          run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -serial ${{ secrets.UNITY_LICENSE_KEY }} -username '${{ secrets.UNITY_USERNAME }}' -password '${{ secrets.UNITY_PASSWORD }}'
 
         - name: Archive Windows Build
           uses: actions/upload-artifact@v1
@@ -38,4 +38,4 @@ jobs:
 
 # Return License       
         - name: return License
-           run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -returnlicense -username ${{ secrets.UNITY_USERNAME }} -password ${{ secrets.UNITY_PASSWORD }}
+          run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -returnlicense -username ${{ secrets.UNITY_USERNAME }} -password ${{ secrets.UNITY_PASSWORD }}
