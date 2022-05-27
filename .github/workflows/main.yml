@@ -15,13 +15,11 @@ jobs:
         - name: Activate Unity
           run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_c2020.c.ulf || exit 0
         - name: license
-          run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -serial ${{ secrets.UNITY_LICENSE_KEY }} -username '${{ secrets.UNITY_USERNAME }}' -password '${{ secrets.UNITY_PASSWORD }}'
+	    run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -serial ${{ secrets.UNITY_LICENSE_KEY }} -username '${{ secrets.UNITY_USERNAME }}' -password '${{ secrets.UNITY_PASSWORD }}'
         
         # Build Windows and OSX
         - name: Build Windows Player
-          run: /opt/unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -projectPath . -buildWindows64Player ./bin-win64/CISample.exe
-        - name: Build OSX Player
-          run: /opt/unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -projectPath . -buildOSXUniversalPlayer ./bin-osx/CISample.app   
+          run: /opt/unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -projectPath . -buildAndroidPlayer ./bin-win64/CISample.exe
 
         - name: Archive Windows Build
           uses: actions/upload-artifact@v1
@@ -29,12 +27,6 @@ jobs:
             name: CISampleWin64Binary
             path: ./bin-win64
 
-        - name: Archive Mac Build
-          uses: actions/upload-artifact@v1
-          with:
-            name: CISampleOSXBinary
-            path: ./bin-osx
-
-# Return License       
-        - name: return License
-          run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -returnlicense -username ${{ secrets.UNITY_USERNAME }} -password ${{ secrets.UNITY_PASSWORD }}
+        # Return License       
+	  - name: return License
+	    run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -returnlicense -username ${{ secrets.UNITY_USERNAME }} -password ${{ secrets.UNITY_PASSWORD }}
