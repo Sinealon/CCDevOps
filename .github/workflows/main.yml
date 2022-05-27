@@ -19,13 +19,13 @@ jobs:
         
         # Build Windows and OSX
         - name: Build Windows Player
-          run: /opt/unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -projectPath . -buildTarget Android
+          run: /opt/unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -projectPath . -buildTarget Android ./bin-android/CISample.exe
 
         - name: Archive Windows Build
           uses: actions/upload-artifact@v1
           with:
-            name: CISampleWin64Binary
-            path: ./bin-win64
+            name: CISampleAndroidBinary
+            path: ./bin-android
 
         # Return License       
 	  - name: return License
