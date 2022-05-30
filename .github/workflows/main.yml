@@ -16,16 +16,7 @@ jobs:
           run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_c2020.c.ulf || exit 0
         - name: license
           run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -serial ${{ secrets.UNITY_LICENSE_KEY }} -username '${{ secrets.UNITY_USERNAME }}' -password '${{ secrets.UNITY_PASSWORD }}'
-
-        # Run Tests
-        steps:        
-        - name: Setup .Net Core
-          uses: actions/setup-dotnet@v1
-          with:
-            dotnet-version:3.1.101
-        - name: Build with dotnet
-          run: dotnet tests ./Assets/Tests/Testrunn.cs --logger:trx
-
+        
         # Build Android
         - name: Create Android Build
           run: /opt/unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -projectPath . -buildTarget Android
