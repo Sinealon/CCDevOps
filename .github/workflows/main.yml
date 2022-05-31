@@ -3,7 +3,7 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: unityci/editor:2020.3.32f1-base-0
+    container: unityci/editor:2020.3.32f1-base-1
     steps:
         - name: Unity - Test runner
           uses: game-ci/unity-test-runner@v2.0.2
