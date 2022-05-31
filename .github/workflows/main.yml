@@ -2,7 +2,7 @@
 on: [push]
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     container: unityci/editor:windows-2020.3.32f1-windows-il2cpp-1.0.1
     steps:
         - name: Setup .NET Core SDK
