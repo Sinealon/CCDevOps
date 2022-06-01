@@ -1,33 +1,30 @@
-﻿name: CI
+﻿name: Build project
+
 on: [push]
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    container: unityci/editor:2020.3.32f1-base-1
-    steps:
-        - uses: game-ci/unity-test-runner@v2
-          env:
-            UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-            UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-            UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
-          with:
-             githubToken: ${{ secrets.GITHUB_TOKEN }}
-        - name: Checkout Project
-          uses: actions/checkout@v1
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
 
-        - name: Decrypt the license file
-          run: openssl aes-256-cbc -d -in .github/Unity_c2020.c.ulf.enc -k ${{ secrets.UNITY_LICENSE_DECRYPT_KEY }} >> .github/Unity_c2020.c.ulf
-        
-        # Activate unity
-        - name: Activate Unity
-          run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_c2020.c.ulf || exit 0
-        - name: license
-          run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -serial ${{ secrets.UNITY_LICENSE_KEY }} -username '${{ secrets.UNITY_USERNAME }}' -password '${{ secrets.UNITY_PASSWORD }}'
-        
-        # Build Android
-        - name: Create Android Build
-          run: /opt/unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -projectPath . -buildTarget Android
-
-        # Return License       
-        - name: return License
-          run: /opt/unity/Editor/Unity -quit -batchmode -nographics -logFile -returnlicense -username ${{ secrets.UNITY_USERNAME }} -password ${{ secrets.UNITY_PASSWORD }}
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0
+                  lfs: true
+            - uses: actions/cache@v2
+              with:
+                  path: Library
+                  key: Library-${{ matrix.targetPlatform }}
+                  restore-keys: Library-
+            - uses: game-ci/unity-builder@v2
+              env:
+                UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+                UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+                UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+              with:
+                  targetPlatform: ${{ matrix.targetPlatform }}
+            - uses: actions/upload-artifact@v2
+              with:
+                  name: Build-Android
