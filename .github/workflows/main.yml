@@ -9,18 +9,18 @@ jobs:
             fail-fast: false
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v1
               with:
                   fetch-depth: 0
                   lfs: true
 
         
-            - uses: actions/cache@v2
+            - uses: actions/cache@v1
               with:
                   path: Library
                   key: Library-${{ matrix.targetPlatform }}
                   restore-keys: Library-
-            - uses: game-ci/unity-builder@v2
+            - uses: game-ci/unity-builder@v1
             # Activate unity
             - name: Activate Unity
               run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_c2020.c.ulf || exit 0
@@ -32,6 +32,6 @@ jobs:
                 UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
               with:
                   targetPlatform: ${{ matrix.targetPlatform }}
-            - uses: actions/upload-artifact@v2
+            - uses: actions/upload-artifact@v1
               with:
                   name: Build-Android
