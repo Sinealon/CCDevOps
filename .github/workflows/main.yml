@@ -28,6 +28,7 @@ jobs:
             UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
             UNITY_SERIAL: ${{ secrets.UNITY_LICENSE_KEY }}
         with:
+          allowDirtyBuild: true
           targetPlatform: ${{ matrix.targetPlatform }}
       - uses: actions/upload-artifact@v2
         with:
