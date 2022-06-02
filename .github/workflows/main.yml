@@ -38,7 +38,6 @@ jobs:
         uses: game-ci/unity-return-license@v2
         if: always()
 
-jobs:
   testAllModes:
     name: Test in ${{ matrix.testMode }}
     runs-on: ubuntu-latest
