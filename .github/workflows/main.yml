@@ -11,8 +11,8 @@ jobs:
       fail-fast: false
       matrix:
         testMode:
-          - playmode
-          - editmode
+          - PlayMode
+          - EditMode
     steps:
       - uses: actions/checkout@v2
         with:
@@ -20,7 +20,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: Library
-          key: Library-CCProjekt
+          key: Library-
           restore-keys: |
             Library-
       - uses: game-ci/unity-test-runner@v2
