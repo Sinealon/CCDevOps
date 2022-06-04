@@ -23,6 +23,8 @@ jobs:
           key: Library-
           restore-keys: |
             Library-
+      - script: echo "hallo"
+	- script: echo "${{ steps.tests.outputs.artifactsPath }}"
       - uses: game-ci/unity-test-runner@v2
         id: tests
         env:
