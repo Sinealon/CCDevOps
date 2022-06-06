@@ -56,7 +56,7 @@ jobs:
       fail-fast: false
       matrix:
         targetPlatform:
-          - iOS # Build an iOS player.
+          #- iOS # Build an iOS player.
           - Android # Build an Android .apk standalone app.
     steps:
       - uses: actions/checkout@v2
