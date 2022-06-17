@@ -78,7 +78,7 @@ jobs:
             UNITY_SERIAL: ${{ secrets.UNITY_LICENSE_KEY }}
         with:
           allowDirtyBuild: true
-          targetPlatform: ${{ matrix.targetPlatform }}
+          targetPlatform: ${{ matrix.targetPlatform }}.apk
       - uses: actions/upload-artifact@v2
         with:
           name: Build-${{ matrix.targetPlatform }}
