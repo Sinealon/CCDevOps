@@ -88,5 +88,15 @@ jobs:
       - name: Return license
         uses: game-ci/unity-return-license@v2
         if: always()
-      - name: Checkout
-        uses: actions/checkout@v2
+	# Saucectl
+      - name: Install saucectl
+        uses: saucelabs/saucectl-run-action@v1
+        with:
+          skip-run: true
+          testing-environment: ""
+          concurrency: 10
+
+      - name: Cypress with Cucumber
+        run: |
+          cd examples/cucumber
+          saucectl run
