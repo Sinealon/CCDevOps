@@ -93,6 +93,8 @@ jobs:
       - name: ChangeDir
         run: cd build 
 
+      - name: List
+        run: echo ls
       - name: ZipAPK
         run: zip Android.zip Android.apk
 
