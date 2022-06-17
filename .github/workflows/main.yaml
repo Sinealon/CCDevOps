@@ -89,6 +89,5 @@ jobs:
         uses: game-ci/unity-return-license@v2
         if: always()
 
-    steps:
     - name: Checkout
       uses: actions/checkout@v2
