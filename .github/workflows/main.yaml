@@ -94,7 +94,7 @@ jobs:
         run: cd build 
 
       - name: List
-        run: ls
+        run: ls -a
       - name: ZipAPK
         run: zip Android.zip Android.apk
 
