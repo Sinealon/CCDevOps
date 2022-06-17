@@ -91,7 +91,7 @@ jobs:
       # Upload Sauce Labs (appium übernimmt die Aufgabe)
 
       - name: ZipAPK
-        run: mv Android.apk build/Android
+        run: mv build/Android Android.apk
 
       - name: List
         run: ls 
