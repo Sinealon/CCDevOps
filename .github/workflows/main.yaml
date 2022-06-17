@@ -94,7 +94,7 @@ jobs:
         run: cd build 
 
       - name: ZipAPK
-        run: zip –u Android.zip Android.apk
+        run: zip Android.zip Android.apk
 
       - name: Upload apk
         run: curl -u "${{secrets.SAUCE_USERNAME}}:${{secrets.SAUCE_ACCESS_KEY}}" --location
