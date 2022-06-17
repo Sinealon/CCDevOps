@@ -3,7 +3,7 @@ jobs:
         runs-on: ubuntu-latest
         name: Action Test
         steps:
-            # ...
+            - name: AutomatetUITest
             - uses: saucelabs/sauce-connect-action@v2
               with:
                   username: ${{ secrets.SAUCE_USERNAME }}
@@ -11,3 +11,8 @@ jobs:
                   tunnelIdentifier: 63a91446041749ea91724e4fc675871c
                   configFile: ${{ github.workspace }}/sc-configuration/config.yaml
             # ...
+            - uses: actions/upload-artifact@v2
+              if: ${{ failure() }}
+              with:
+                name: sauce-connect-log
+                path: ${{ env.SAUCE_CONNECT_DIR_IN_HOST }}/sauce-connect.log
