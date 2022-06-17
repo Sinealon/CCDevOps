@@ -87,14 +87,5 @@ jobs:
       - name: Return license
         uses: game-ci/unity-return-license@v2
         if: always()
-      # Saucectl
-      - name: Install saucectl
-        uses: saucelabs/saucectl-run-action@v1
-        with:
-          skip-run: true
-          testing-environment: ""
-          concurrency: 10
 
-      - name: Upload_Sauce
-        run:
-          saucectl run
+      # Upload Sauce Labs (appium übernimmt die Aufgabe)
