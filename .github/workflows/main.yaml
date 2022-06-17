@@ -2,6 +2,10 @@
 
 on: [push]
 
+env:
+  SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
+  SAUCE_ACCESS_KEY: ${{secrets.SAUCE_ACCESS_KEY}}
+
 jobs:
 
   testAllModes:
@@ -85,11 +89,6 @@ jobs:
         uses: game-ci/unity-return-license@v2
         if: always()
 
-env:
-  SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
-  SAUCE_ACCESS_KEY: ${{secrets.SAUCE_ACCESS_KEY}}
-
-jobs:
   Testrun:
     runs-on: ubuntu-latest
     steps:
