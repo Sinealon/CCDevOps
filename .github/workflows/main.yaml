@@ -97,7 +97,7 @@ jobs:
         run: ls 
 
       - name: ZipIt
-        run: zip Android.zip Android.apk
+        run: zip Android.apk Android.zip
 
       - name: Upload apk
         run: sudo curl -u "${{secrets.SAUCE_USERNAME}}:${{secrets.SAUCE_ACCESS_KEY}}" --location
