@@ -1,18 +1,29 @@
+name: "PR Checks"
+on: push
+
 jobs:
     test:
         runs-on: ubuntu-latest
         name: Action Test
         steps:
-            - name: AutomatetUITest
-            - uses: saucelabs/sauce-connect-action@v2
+            - uses: actions/checkout@v1
+
+            - name: "Install Dependencies"
+              run: npm install
+
+            - name: "Build the package"
+              run: npm run build
+
+            - uses: ./
               with:
-                  username: ${{ secrets.SAUCE_USERNAME }}
-                  accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
-                  tunnelIdentifier: 63a91446041749ea91724e4fc675871c
-                  configFile: ${{ github.workspace }}/sc-configuration/config.yaml
-            # ...
-            - uses: actions/upload-artifact@v2
-              if: ${{ failure() }}
-              with:
-                name: sauce-connect-log
-                path: ${{ env.SAUCE_CONNECT_DIR_IN_HOST }}/sauce-connect.log
+                username: ${{ secrets.SAUCE_USERNAME }}
+                accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
+                tunnelName: github-action-tunnel
+                tunnelPool: true
+                configFile: ${{ github.workspace }}/sc-configuration/config.yaml
+
+            - name: "Run Test"
+              run: npm run test
+              env:
+                SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+                SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
