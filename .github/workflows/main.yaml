@@ -91,7 +91,7 @@ jobs:
       # Upload Sauce Labs (appium übernimmt die Aufgabe)
 
       - name: ChangeDir
-        run: cd /build 
+        run: cd build 
 
 
       - name: Upload apk
