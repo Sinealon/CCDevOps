@@ -88,6 +88,5 @@ jobs:
       - name: Return license
         uses: game-ci/unity-return-license@v2
         if: always()
-
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
