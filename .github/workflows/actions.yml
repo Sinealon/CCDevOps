@@ -1,29 +1,75 @@
-name: "PR Checks"
-on: push
+name: saucectl cypress tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+env:
+  SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
+  SAUCE_ACCESS_KEY: ${{secrets.SAUCE_ACCESS_KEY}}
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        name: Action Test
-        steps:
-            - uses: actions/checkout@v1
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-            - name: "Install Dependencies"
-              run: npm install
+      - name: Saucectl RUN Docker and Cloud
+        uses: saucelabs/saucectl-run-action@v1
+        with:
+          testing-environment: ""
+          concurrency: 10
+  cucumber:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-            - name: "Build the package"
-              run: npm run build
+      - name: Install saucectl
+        uses: saucelabs/saucectl-run-action@v1
+        with:
+          skip-run: true
+          testing-environment: ""
+          concurrency: 10
 
-            - uses: ./
-              with:
-                username: ${{ secrets.SAUCE_USERNAME }}
-                accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
-                tunnelName: github-action-tunnel
-                tunnelPool: true
-                configFile: ${{ github.workspace }}/sc-configuration/config.yaml
+      - name: Cypress with Cucumber
+        run: |
+          cd examples/cucumber
+          saucectl run
+  typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-            - name: "Run Test"
-              run: npm run test
-              env:
-                SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
-                SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+      - name: Install saucectl
+        uses: saucelabs/saucectl-run-action@v1
+        with:
+          skip-run: true
+          testing-environment: ""
+          concurrency: 10
+
+      - name: Cypress with Typescript
+        run: |
+          cd examples/typescript
+          saucectl run
+  allure-plugin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install saucectl
+        uses: saucelabs/saucectl-run-action@v1
+        with:
+          skip-run: true
+          testing-environment: ""
+          concurrency: 10
+
+      - name: Cypress with Allure Plugin
+        run: |
+          cd examples/allure-plugin
+          saucectl run
