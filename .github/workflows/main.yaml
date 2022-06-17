@@ -91,7 +91,7 @@ jobs:
       # Upload Sauce Labs (appium übernimmt die Aufgabe)
 
       - name: ZipAPK
-        run: ls /build/Android.apk
+        run: ls /build
 
       - name: Upload apk
         run: curl -u "${{secrets.SAUCE_USERNAME}}:${{secrets.SAUCE_ACCESS_KEY}}" --location
