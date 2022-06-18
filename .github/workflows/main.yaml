@@ -97,6 +97,12 @@ jobs:
       - name: Rename Android => Android.apk
         run: sudo mv build/Android Android.apk
 
+      - name: List
+        run: ls -l
+ 
+      - name: List 2
+        run: ls build
+
       - name: Upload apk
         run: sudo curl -u "${{secrets.SAUCE_USERNAME}}:${{secrets.SAUCE_ACCESS_KEY}}" --location
              --request POST 'https://api.eu-central-1.saucelabs.com/v1/storage/upload'
