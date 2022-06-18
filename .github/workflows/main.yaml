@@ -97,6 +97,10 @@ jobs:
       - name: Rename Android => Android.apk
         run: sudo mv build/Android Android.apk
 
+      - uses: actions/download-artifact@v3
+        with:
+          name: Build-Android
+
       - name: List
         run: ls -l
  
