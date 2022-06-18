@@ -1,15 +1,19 @@
 ﻿name: Build project
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 env:
   SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
   SAUCE_ACCESS_KEY: ${{secrets.SAUCE_ACCESS_KEY}}
 
 jobs:
-  runs-on: ubuntu-latest
+
   testAllModes:
     name: Test in ${{ matrix.testMode }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -55,6 +59,7 @@ jobs:
   buildForAllSupportedPlatforms:
     needs: [testAllModes]
     name: Build for ${{ matrix.targetPlatform }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
