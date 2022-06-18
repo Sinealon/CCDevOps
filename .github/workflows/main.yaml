@@ -57,7 +57,7 @@ jobs:
         if: always()
 
   buildForAllSupportedPlatforms:
-    needs: [testAllModes]
+    #needs: [testAllModes]
     name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
     strategy:
