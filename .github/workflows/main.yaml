@@ -95,7 +95,3 @@ jobs:
 
       - name: ZipIt
         run: zip Android.zip Android.apk
-
-
-      - name: List Zip files
-        run: curl -u "${{secrets.SAUCE_USERNAME}}:${{secrets.SAUCE_ACCESS_KEY}}"
