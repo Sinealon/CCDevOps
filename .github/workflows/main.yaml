@@ -2,8 +2,6 @@
 
 on:
   push:
-    branches:
-      - main
 
 env:
   SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
