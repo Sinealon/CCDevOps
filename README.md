@@ -2,4 +2,4 @@
 
 ![example workflow](https://github.com/Sinealon/CCDevOps/actions/workflows/main.yaml/badge.svg)
 
-Hallo Welt!
+Hallo Welt 2!
