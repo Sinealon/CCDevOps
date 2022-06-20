@@ -5,10 +5,7 @@ on:
 
 env:
   SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
-  SAUCE_ACCESS_KEY: ${{secrets.SAUCE_ACCESS_KEY}}            
-  UNITY_EMAIL: ${{ secrets.UNITY_USERNAME }}
-  UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-  UNITY_SERIAL: ${{ secrets.UNITY_LICENSE_KEY }}
+  SAUCE_ACCESS_KEY: ${{secrets.SAUCE_ACCESS_KEY}}
 
 jobs:
 
@@ -32,6 +29,10 @@ jobs:
             Library-
       - uses: game-ci/unity-test-runner@v2
         id: tests
+        env:             
+          UNITY_EMAIL: ${{ secrets.UNITY_USERNAME }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_SERIAL: ${{ secrets.UNITY_LICENSE_KEY }}
         with:
           testMode: ${{ matrix.testMode }}
           artifactsPath: ${{ matrix.testMode }}-artifacts
@@ -70,6 +71,10 @@ jobs:
           key: Library-${{ matrix.targetPlatform }}
           restore-keys: Library-
       - uses: game-ci/unity-builder@v2
+        env:             
+          UNITY_EMAIL: ${{ secrets.UNITY_USERNAME }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_SERIAL: ${{ secrets.UNITY_LICENSE_KEY }}
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
       - uses: actions/upload-artifact@v2
